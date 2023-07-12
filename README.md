@@ -26,3 +26,5 @@ c)            Buyer’s Bank – Financial institution responsible for providing
 d)            Seller’s Bank – Financial institution responsible for verifying LOC and making payment to Seller as per LC
 
 e)            Transporter – Entity responsible for delivering goods from Seller to Buyer
+
+This project contains a Backend Blockchain Business logic, Rest API Server, Web Service for the Client and a front end in HTMl and CSS.
