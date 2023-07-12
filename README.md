@@ -1,4 +1,6 @@
 # Trade-Finance-CorDapp-Blockchain-Corda
+A CorDapp, short for Corda Distributed Application, is an application built on the Corda platform. Corda is an open-source blockchain platform designed specifically for business applications.
+
 Business Context: Trade finance signifies financing for trade, and it concerns both domestic and international trade transactions. A trade transaction requires a seller of goods and services as well as a buyer. Various intermediaries such as banks and financial institutions can facilitate these transactions by financing the trade.
 
 Trade finance is the process by which sellers (exporters) and buyers (importers) mitigate trade risk through the use of trusted intermediaries.
