@@ -1,0 +1,55 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Trade Finance Corda</title>
+  <style>
+body {
+  background-image: url('https://media.istockphoto.com/id/135887442/photo/white-tissue-paper-background-with-geometric-design.webp?b=1&s=170667a&w=0&k=20&c=hbW4kQw0YDlK5wWG5_UvHYVaLuz0ZXZZdUhh5QHUmWo=');
+}
+</style>
+</head>
+<body>
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBC-CDEZdIuoihGRT19AkKZK1mSeWoDOIU-W_Kw4JH&s" width="600" height="200">
+<hr >
+<h1><b>CORDA - Trade-Finance CorDapp - Web Service</b></h1>
+<hr>
+<marquee>Welcome to Trade-Finance Web Service. &nbsp&nbsp&nbsp&nbsp&nbsp&nbspAll the transactions are stored in a private Blockchain.&nbsp&nbsp&nbsp&nbsp&nbsp&nbspDo not share your credentials with anyone for security reasons.&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp News:  <i>R3, the enterprise distributed ledger technology (DLT) and services firm, today announced the next generation of its flagship platform Corda at its hosted event in New York. The updated version has been designed for global financial market infrastructure providers and central banks to enable applications to interoperate seamlessly and securely across other open enterprise DLT networks</i></marquee>
+<hr>
+<div style="text-align:center;">
+<p>
+<centre><h2>BUYER</h2>
+<a href="http://localhost:50005/me">My Details</a><br>
+<a href="http://localhost:50005/peers">Peers</a><br>
+<a href="http://localhost:50005/states">My states</a><br>
+<a href="http://localhost:50005/ious">My IOUs</a><br>
+<br>
+<b>Generate a transaction</b><br>
+<form action="http://localhost:50005/create-iou" method="post" enctype="application/x-www-form-urlencoded" autocomplete="off" >
+  <label>IOU Value</label>
+  <input type="text" name="iouValue"><br>
+  <label>Party name</label>
+  <input type="text" name="partyName"><br>
+  <label>Status Update</label>
+  <input type="text" name="statusUpdate"><br>
+  <button type="Generate">Generate</button>
+</form>
+<b>Send a Message</b>
+<form action="http://localhost:50005/create-message" method="post" enctype="application/x-www-form-urlencoded" autocomplete="off" >
+  <label>Send Message</label>
+  <input type="text" name="message"><br>
+  <label>Send to Party</label>
+  <input type="text" name="partyName"><br>
+  <button type="Send">Send</button>
+</form>
+</centre>
+<br><hr><br>
+
+</p>
+</div>
+
+
+<br><hr><br>
+</body>
+</html>

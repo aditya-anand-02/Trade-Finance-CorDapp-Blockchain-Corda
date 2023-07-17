@@ -31,7 +31,15 @@ body {
     <input type="text" name="partyName"><br>
     <label>Status Update</label>
     <input type="text" name="statusUpdate"><br>
-    <button type="submit">Submit</button>
+    <button type="Generate">Generate</button>
+</form>
+<b>Send a Message</b>
+<form action="http://localhost:50005/create-message" method="post" enctype="application/x-www-form-urlencoded" autocomplete="off" >
+    <label>Send Message</label>
+    <input type="text" name="message"><br>
+    <label>Send to Party</label>
+    <input type="text" name="partyName"><br>
+    <button type="Send">Send</button>
 </form>
 <br><hr><br>
 </p>
@@ -50,7 +58,15 @@ body {
     <input type="text" name="partyName"><br>
     <label>Status Update</label>
     <input type="text" name="statusUpdate"><br>
-    <button type="submit">Submit</button>
+    <button type="Generate">Generate</button>
+</form>
+<b>Send a message</b>
+<form action="http://localhost:50006/create-message" method="post" enctype="application/x-www-form-urlencoded" autocomplete="off" >
+    <label>Send Message</label>
+    <input type="text" name="message"><br>
+    <label>Send to Party</label>
+    <input type="text" name="partyName"><br>
+    <button type="Send">Send</button>
 </form>
 <br><hr><br>
 </p>
@@ -69,7 +85,15 @@ body {
     <input type="text" name="partyName"><br>
     <label>Status Update</label>
     <input type="text" name="statusUpdate"><br>
-    <button type="submit">Submit</button>
+    <button type="Generate">Generate</button>
+</form>
+<b>Send a Message</b>
+<form action="http://localhost:50007/create-message" method="post" enctype="application/x-www-form-urlencoded" autocomplete="off" >
+    <label>Send Message</label>
+    <input type="text" name="message"><br>
+    <label>Send to Party</label>
+    <input type="text" name="partyName"><br>
+    <button type="Send">Send</button>
 </form>
 <br><hr><br>
 </p>
@@ -88,8 +112,44 @@ body {
     <input type="text" name="partyName"><br>
     <label>Status Update</label>
     <input type="text" name="statusUpdate"><br>
-    <button type="submit">Submit</button>
+    <button type="Generate">Generate</button>
 
+</form>
+<b>Send a Message</b>
+<form action="http://localhost:50008/create-message" method="post" enctype="application/x-www-form-urlencoded" autocomplete="off" >
+    <label>Send Message</label>
+    <input type="text" name="message"><br>
+    <label>Send to Party</label>
+    <input type="text" name="partyName"><br>
+    <button type="Send">Send</button>
+</form>
+<br><hr><br>
+</p>
+
+<p> <h2>TRANSPORTER</h2>
+<a href="http://localhost:50009/me">My Details</a><br>
+<a href="http://localhost:50009/peers">My Network peers</a><br>
+<a href="http://localhost:50009/states">My states</a><br>
+<a href="http://localhost:50009/ious">My IOUs</a><br>
+<br>
+<b>Generate a transaction</b><br>
+<form action="http://localhost:50009/create-iou" method="post" enctype="application/x-www-form-urlencoded" autocomplete="off" >
+    <label>IOU Value</label>
+    <input type="text" name="iouValue"><br>
+    <label>Party name</label>
+    <input type="text" name="partyName"><br>
+    <label>Status Update</label>
+    <input type="text" name="statusUpdate"><br>
+    <button type="Generate">Generate</button>
+
+</form>
+<b>Send a Message</b>
+<form action="http://localhost:50009/create-message" method="post" enctype="application/x-www-form-urlencoded" autocomplete="off" >
+    <label>Send Message</label>
+    <input type="text" name="message"><br>
+    <label>Send to Party</label>
+    <input type="text" name="partyName"><br>
+    <button type="Send">Send</button>
 </form>
 <br><hr><br>
 </p>

@@ -1,35 +1,35 @@
 package net.corda.samples.example.flows;
+
 import co.paralleluniverse.fibers.Suspendable;
-import net.corda.core.contracts.UniqueIdentifier;
-import net.corda.samples.example.contracts.MessageContract;
-import net.corda.samples.example.states.MessageState;
 import net.corda.core.contracts.Command;
 import net.corda.core.contracts.ContractState;
+import net.corda.core.contracts.UniqueIdentifier;
 import net.corda.core.crypto.SecureHash;
 import net.corda.core.flows.*;
+import net.corda.core.identity.CordaX500Name;
 import net.corda.core.identity.Party;
 import net.corda.core.transactions.SignedTransaction;
 import net.corda.core.transactions.TransactionBuilder;
 import net.corda.core.utilities.ProgressTracker;
-import net.corda.core.utilities.ProgressTracker.Step;
-import java.util.Arrays;
+import net.corda.samples.example.contracts.InvoiceContract;
+import net.corda.samples.example.states.InvoiceState;
 import net.corda.core.flows.InitiatingFlow;
 
+import java.util.Arrays;
 
 import static net.corda.core.contracts.ContractsDSL.requireThat;
-import net.corda.core.identity.CordaX500Name;
 
-public class SendMessage {
+public class SendInvoice {
     @InitiatingFlow
     @StartableByRPC
-    public static class Initiator extends FlowLogic<SignedTransaction> {
+    public static class InitiatorA extends FlowLogic<SignedTransaction> {
         private final Party receivingParty;
-        private final String message;
+        private final int amount;
 
-        private final Step GENERATING_TRANSACTION = new ProgressTracker.Step("Generating transaction.");
-        private final Step VERIFYING_TRANSACTION = new ProgressTracker.Step("Verifying Initiator contract constraints.");
-        private final Step SIGNING_TRANSACTION = new ProgressTracker.Step("Signing transaction with our private key.");
-        private final Step GATHERING_SIGS = new ProgressTracker.Step("Gathering the other Party's signature.") {
+        private final ProgressTracker.Step GENERATING_TRANSACTION = new ProgressTracker.Step("Generating transaction.");
+        private final ProgressTracker.Step VERIFYING_TRANSACTION = new ProgressTracker.Step("Verifying Initiator contract constraints.");
+        private final ProgressTracker.Step SIGNING_TRANSACTION = new ProgressTracker.Step("Signing transaction with our private key.");
+        private final ProgressTracker.Step GATHERING_SIGS = new ProgressTracker.Step("Gathering the other Party's signature.") {
             @Override
             public ProgressTracker childProgressTracker() {
                 return CollectSignaturesFlow.Companion.tracker();
@@ -57,10 +57,10 @@ public class SendMessage {
 
 
 
-        public Initiator(String message, Party receivingParty) {
+        public InitiatorA(int amount, Party receivingParty) {
 
             this.receivingParty = receivingParty;
-            this.message = message;
+            this.amount= amount;
         }
 
         @Suspendable
@@ -70,12 +70,12 @@ public class SendMessage {
             final Party notary = getServiceHub().getNetworkMapCache().getNotary(CordaX500Name.parse("O=Notary,L=London,C=GB"));
             progressTracker.setCurrentStep(GENERATING_TRANSACTION);
             Party sendingParty = getOurIdentity();
-            MessageState msgState = new MessageState(message, sendingParty, receivingParty, new UniqueIdentifier());
-            final Command<MessageContract.Commands.Create> txCommand1 = new Command<>(
-                    new MessageContract.Commands.Create(),
-                    Arrays.asList(msgState.getMsgSender().getOwningKey(), msgState.getMsgReceiver().getOwningKey()));
+            InvoiceState invoiceState = new InvoiceState(amount, sendingParty, receivingParty, new UniqueIdentifier());
+            final Command<InvoiceContract.Commands.Create> txCommand1 = new Command<>(
+                    new InvoiceContract.Commands.Create(),
+                    Arrays.asList(invoiceState.getSender().getOwningKey(), invoiceState.getReceiver().getOwningKey()));
             final TransactionBuilder txBuilder1 = new TransactionBuilder(notary)
-                    .addOutputState(msgState, MessageContract.ID)
+                    .addOutputState(invoiceState, InvoiceContract.ID)
                     .addCommand(txCommand1);
             //status update
             // Stage 2.
@@ -102,13 +102,13 @@ public class SendMessage {
         }
     }
 
-    @InitiatedBy(Initiator.class)
-    public static class Responder extends FlowLogic<SignedTransaction> {
+    @InitiatedBy(SendInvoice.InitiatorA.class)
+    public static class ResponderB extends FlowLogic<SignedTransaction> {
         //private variable
         private final FlowSession receivingPartySession;
 
         //Constructor
-        public Responder(FlowSession receivingPartySession) {
+        public ResponderB(FlowSession receivingPartySession) {
             this.receivingPartySession = receivingPartySession;
         }
 
@@ -124,7 +124,7 @@ public class SendMessage {
                 protected void checkTransaction(SignedTransaction stx) {
                     requireThat(require -> {
                         ContractState output1 = stx.getTx().getOutputs().get(0).getData();
-                        require.using("This must be a Message transaction.", output1 instanceof MessageState);
+                        require.using("This must be an Invoice transaction.", output1 instanceof InvoiceState);
 
 
                         return null;
@@ -139,4 +139,3 @@ public class SendMessage {
 
     }
 }
-
